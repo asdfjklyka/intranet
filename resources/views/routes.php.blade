@@ -1,0 +1,31 @@
+/*
+Route::get('home/systemsettings', 'HomeController@systemsettings');
+// Route::get('/home/dashboard', function () {
+// 	return redirect()->action('HomeController@dashboard');
+
+
+
+
+
+// Route::get('/home/systemaccount/user', function () {
+//     return view('systemaccount.user.index'); });
+Route::get('/user/add', 'UserController@create');
+Route::get('/systemaccount/user', 'UserController@index');
+Route::post('/addUser', 'UserController@store');
+Route::get('/account/destroy/{$id?}', function(){});
+
+
+
+Route::get('/home/department', function () {
+    return view('systemaccount.department.index'); });
+Route::get('/home/department/add', 'DepartmentController@create');
+Route::get('/home/department', 'DepartmentController@index');
+Route::post('/addDepartment', 'DepartmentController@store');
+
+
+Route::get('/home/position', function () {
+    return view('systemaccount.position.index'); });
+Route::get('/home/position/add', 'PositionController@create');
+Route::get('/home/position', 'PositionController@index');
+Route::post('/addPosition', 'PositionController@store');
+*/
