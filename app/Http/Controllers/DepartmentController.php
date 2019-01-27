@@ -17,12 +17,13 @@ class DepartmentController extends Controller
 	public function store(Request $request) {
 
 		$validate = $request->validate([
-            'name' => 'required|string|max:50|unique:departments'
-        ]);
+			'name' => 'required|string|max:50|unique:departments'
+		]);
 
 		$data = $request->all();
 
-		Department::create($request->all());
+		Department::create($data);
+
 		return redirect()->route('department.index')
 		->with('success', 'New Department Successfully Created!');
 	}
@@ -31,22 +32,30 @@ class DepartmentController extends Controller
 		return view('systemsettings.department.create');
 	}
 
-	public function update(Request $request){
+	public function update(Request $request, $id){
+/*
+    $validate = $request->validate([
+      'name' => 'string|max:50|min:6',
+    ]);*/
 
-		return view('systemsettings.department.update');
+    $department = Department::find($id);
 
-		$request->validate([
-            'name' => 'required',
-            'detail' => 'required',
-        ]);
+    if( $department->update( array_filter($request->all()) ) ) {
 
-		$department = Department::find($request->id);
+      return redirect()->route('department.index')
+        ->with('success', 'Department Successfully Updated!');
+    }
+    
+    return "Can't update department.";
 
-		if($department->update(array_filter($request->except('_token')))){
-			return redirect()->route('department.index')
-			->with('success', 'Department Successfully Updated!');
-		}
-		return "Can't update user.";
-	}
+  }
+  
+  public function edit(Request $request, $departmentId)
+  {
+    $data["departments"] = Department::find($departmentId);
+    /*$data["roles"] = Role::all();*/
+    return view('systemsettings.department.edit', $data);
+  }
+
 
 }

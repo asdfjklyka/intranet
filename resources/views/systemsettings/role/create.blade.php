@@ -7,7 +7,7 @@
 		Roles
 	</h1>
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="/role/index"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="breadcrumb-item"><a href="/systemsettings/role"><i class="fa fa-dashboard"></i> Home</a></li>
 		<li class="breadcrumb-item active">Roles</li>
 	</ol>
 </section>

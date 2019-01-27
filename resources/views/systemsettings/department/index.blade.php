@@ -35,8 +35,8 @@
 				<thead>
 					<tr class="" style="">
 						<th>Name</th>
-						<th style="width: 800px">Detail</th>
-						<th>Action</th>
+						<th style="width: 620px">Detail</th>
+						<th style="width: 150px">Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -47,14 +47,14 @@
 						<td>{{$department->detail}}</td>
 						<td class="">
 							
-							<a href='{{ url("systemsettings/department/$department->id") }}'>
+							<a href="">
 								<span class="fa-stack fa-1x">
 									<i class="fa fa-circle fa-stack-2x icon-background icon-view"></i>
 									<i class="fa fa-eye fa-stack-1x" style="color:#fff"></i>
 								</span>
 							</a>
 
-							<a href="{{ url('systemsettings/department/department->id') }}">
+							<a href='{{ url("systemsettings/department/$department->id/edit") }}'>
 								<span class="fa-stack fa-1x">
 									<i class="fa fa-circle fa-stack-2x icon-background icon-edit"></i>
 									<i class="fa fa-edit fa-stack-1x" style="color:#fff"></i>

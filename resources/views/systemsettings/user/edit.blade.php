@@ -6,7 +6,7 @@
 		User
 	</h1>
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="/systemaccount"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="breadcrumb-item"><a href="/systemsettings/user"><i class="fa fa-dashboard"></i> Home</a></li>
 		<li class="breadcrumb-item active">User</li>
 	</ol>
 </section>

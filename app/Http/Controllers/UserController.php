@@ -25,11 +25,16 @@ class UserController extends Controller
     $validate = $request->validate([
       'name' => 'required|Regex:/^[\D]+$/i|max:50|min:6',
       'email' => 'required|email|unique:users|max:50',
-      'password' => 'required|min:6',
+      'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
       'role' => 'required',
     ]);
 
+    
 
+   /* if ($validate->fails()) {
+      return redirect()->back()->withInput();
+    }
+*/
     $data = $request->all();
 
     $data["password"] = Hash::make($data["password"]);
@@ -41,35 +46,38 @@ class UserController extends Controller
   }
 
   public function create() {
-   $data["roles"] = Role::all();
-   return view('systemsettings.user.create', $data);
- }
+    $data["roles"] = Role::all();
+    return view('systemsettings.user.create', $data);
+  }
 
 	// Update record
   public function update(Request $request, $id){
 
     $validate = $request->validate([
-      'name' => 'required|Regex:/^[\D]+$/i|max:50|min:6',
-      'email' => 'required|email|unique:users|max:50',
-      'password' => 'min:6',
-      'role' => 'required',
+      'name' => 'Regex:/^[\D]+$/i|max:50|min:6',
+      'email' => 'email|max:50', 
     ]);
 
     $user = User::find($id);
 
-    if($request->password !== null){
+    if($request->password !== null ){
+      $request->validate([
+        'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/'
+      ]);
+
       $request->merge([
         'password' => Hash::make($request->password)
       ]);
     }
 
-
-    if( $user->update( $request->all()->filter() ) ) {
+    if( $user->update( array_filter($request->all()) ) ) {
 
       return redirect()->route('user.index')
-        ->with('success', 'New User Successfully Created!');
+        ->with('success', 'User Successfully Updated!');
     }
+    
     return "Can't update user.";
+
   }
   
   public function edit(Request $request, $userId)

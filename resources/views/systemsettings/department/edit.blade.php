@@ -3,10 +3,10 @@
 @section('bread')
 <section class="content-header">
 	<h1 style="color:#828894">
-		Update Department
+		Department
 	</h1>
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="/department/index"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="breadcrumb-item"><a href="/systemsettings/department"><i class="fa fa-dashboard"></i> Home</a></li>
 		<li class="breadcrumb-item active">Department</li>
 	</ol>
 </section>
@@ -19,12 +19,13 @@
 	</div>
 	<div class="card-body" >
 
-		<form action="{{ url('/updateDepartment') }}" method="post">
+		<form action='{{ url("/systemsettings/department/$departments->id") }}' method="post">
 			@csrf
+			{{ method_field('PATCH') }}		
 			<div class="row">
 				<div class="form-group col-md-12">
 					<label for="name">Name</label>
-					<input type="text" class="form-control" id="name" name="name" placeholder="Name" aria-describedby="fnHelp">
+					<input type="text" class="form-control" id="name" value="{{ $departments->name }}" name="name" placeholder="Name" aria-describedby="fnHelp">
 				</div>
 
 				<div class="form-group col-md-12">
@@ -33,7 +34,7 @@
 
 					<div class="form-group col-md-12">
 						<label for="name">Detail</label>
-						<input type="text" class="form-control" id="detail" name="detail" placeholder="detail" aria-describedby="fnHelp">
+						<input type="text" class="form-control" id="detail" value="{{ $departments->detail}}" name="detail" placeholder="Detail" aria-describedby="fnHelp">
 					</div>
 
 					<div class="form-group col-md-12"></div>
@@ -57,26 +58,21 @@
 
 
 	// Add record
-	$('#updatedept').click(function(){
-
+	$(document).on("click", ".updatedept" , function() {
+		var id = $(this).data('id');
 		$.ajax({
-			url: 'upadateDepartment',
-			type: 'post',
-			data: { _token: CSRF_TOKEN,
-				name: $('#name').val(),
-				detail: $('#detail').val()
-				
+			url: 'updateDepartment/'+id,
+			type: 'put',
+			data: {
+				_token: CSRF_TOKEN,
+				id: id,
+				name: $("#name_"+id).val(),
+				detail: $("#detail_"+id).val()
 			},
-      success: function(response){
-        
-        // Empty the input fields
-        $('#name').val('');
-        $('#detail').val('');
-        
-    }
-});
-
+			success: function(response){
+				alert(response);
+			}
+		});
 	});
-
 });
 </script>

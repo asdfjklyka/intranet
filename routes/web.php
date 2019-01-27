@@ -31,7 +31,6 @@ Route::post('/addUser', 'UserController@store');
 //DepartmentController
 Route::resource('systemsettings/department', 'DepartmentController');
 Route::post('/addDepartment', 'DepartmentController@store');
-Route::post('/updateDepartment', 'DepartmentController@update');
 
 
 //RoleController

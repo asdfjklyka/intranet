@@ -6,7 +6,7 @@
 		Department
 	</h1>
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="/department/index"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="breadcrumb-item"><a href="/systemsettings/department"><i class="fa fa-dashboard"></i> Home</a></li>
 		<li class="breadcrumb-item active">Department</li>
 	</ol>
 </section>
