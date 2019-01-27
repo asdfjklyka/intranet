@@ -26,17 +26,16 @@
 		<div class="table-responsive">
 
 			@if ($message = Session::get('success'))
-				<div class="alert alert-success">
-					<p>{{ $message }}</p>
-				</div>
+			<div class="alert alert-success">
+				<p>{{ $message }}</p>
+			</div>
 			@endif
-			
 
 			<table id="example1" class="table  table-striped">
 				<thead>
 					<tr class="" style="">
 						<th>Name</th>
-						<th width="800">Description</th>
+						<th width="700">Description</th>
 						<th>Action</th>
 					</tr>
 				</thead>

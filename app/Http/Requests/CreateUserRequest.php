@@ -1,10 +1,10 @@
-<?php
+<!-- <?php
 
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserValidation extends FormRequest
+class CreateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UserValidation extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,8 +29,20 @@ class UserValidation extends FormRequest
             'password' => 'required|min:6',
             'role' => 'required',
             'status' => 'required'
-            
+        ];
+    }
+
+
+    public function messages()
+    {
+        return [
+             'email.required' => 'Email is required!',
+            // 'name.required' => 'Name is required!',
+            // 'password.required' => 'Password is required!',
+            // 'role.required' => 'Role is Required',
+            // 'status.required' => 'Status is required'
         ];
     }
 
 }
+ -->

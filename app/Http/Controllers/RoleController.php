@@ -16,11 +16,12 @@ class RoleController extends Controller
 	// Insert record
  public function store(Request $request) 
  {
-   $request->validate([
-    'name' => 'required',
-    'description' => 'required'
-  ]);
+      $validate = $request->validate([
+            'name' => 'required|string|max:50|unique:roles'
+        ]);
 
+      $data = $request->all();
+      
    Role::create($request->all());
    return redirect()->route('role.index')
       ->with('success', 'New Role Successfully Created!');

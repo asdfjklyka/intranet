@@ -7,29 +7,28 @@ use App\User;
 use App\Role;
 use Hash;
 use Validator;
-use Session;
 
 
 class UserController extends Controller
 {
 	//show data
-  public function index(){      
-    $data["users"] = User::all();
+  public function index(){     
+    $data['users'] = User::with('roles')->get();
     
-    return view('systemsettings.user.index', $data); 
+    return view('systemsettings.user.index', $data);
   }
 
   	// Insert record
   public function store(Request $request) {
 
-		//validate incoming request
-    $request->validate([
-      'email' => 'required|email|unique:users',
-      'name' => 'required|string|max:50',
+		 //validate incoming request
+    $validate = $request->validate([
+      'name' => 'required|Regex:/^[\D]+$/i|max:50|min:6',
+      'email' => 'required|email|unique:users|max:50',
       'password' => 'required|min:6',
       'role' => 'required',
-      'status' => 'required'
     ]);
+
 
     $data = $request->all();
 
@@ -38,21 +37,46 @@ class UserController extends Controller
     User::create($data);
 
     return redirect()->route('user.index')
-      ->with('success', 'New User Successfully Created!');
- }
+    ->with('success', 'New User Successfully Created!');
+  }
 
- public function create() {
+  public function create() {
    $data["roles"] = Role::all();
    return view('systemsettings.user.create', $data);
  }
 
 	// Update record
- public function update(Request $request){
-  $user = User::find($request->id);
-  if($user->update(array_filter($request->except('_token')))){
-    return "User Record Updated successfully";
+  public function update(Request $request, $id){
+
+    $validate = $request->validate([
+      'name' => 'required|Regex:/^[\D]+$/i|max:50|min:6',
+      'email' => 'required|email|unique:users|max:50',
+      'password' => 'min:6',
+      'role' => 'required',
+    ]);
+
+    $user = User::find($id);
+
+    if($request->password !== null){
+      $request->merge([
+        'password' => Hash::make($request->password)
+      ]);
+    }
+
+
+    if( $user->update( $request->all()->filter() ) ) {
+
+      return redirect()->route('user.index')
+        ->with('success', 'New User Successfully Created!');
+    }
+    return "Can't update user.";
   }
-  return "Can't update user.";
-}
+  
+  public function edit(Request $request, $userId)
+  {
+    $data["users"] = User::find($userId);
+    $data["roles"] = Role::all();
+    return view('systemsettings.user.edit', $data);
+  }
 
 }

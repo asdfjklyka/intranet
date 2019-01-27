@@ -43,30 +43,29 @@
 					</tr>
 				</thead>
 				<tbody>
-					
 					@foreach($users as $user)
 						<tr>
 							<td>{{$user->name}}</td>
 							<td>{{$user->email}}</td>
-							<td>{{$user->role}}</td>
+							<td>{{$user->roles->name}}</td>
 							<td>{{$user->status}}</td>
 							<td class="">
 							
-							<a href='{{ url("user/show/$user->id") }}'>
+							<a href='{{ url("systemsettings/user/$user->id") }}'>
 								<span class="fa-stack fa-1x">
 									<i class="fa fa-circle fa-stack-2x icon-background icon-view"></i>
 									<i class="fa fa-eye fa-stack-1x" style="color:#fff"></i>
 								</span>
 							</a>
 
-							<a href='{{ url("user/edit/$user->id") }}'>
+							<a href='{{ url("systemsettings/user/$user->id/edit") }}'>
 								<span class="fa-stack fa-1x">
 									<i class="fa fa-circle fa-stack-2x icon-background icon-edit"></i>
 									<i class="fa fa-edit fa-stack-1x" style="color:#fff"></i>
 								</span>
 							</a>
 
-							<a href='{{ url("user/destroy/$user->id") }}'>
+							<a href='{{ url("systemsettings/user/$user->id") }}'>
 								<span class="fa-stack fa-1x">
 									<i class="fa fa-circle fa-stack-2x icon-background icon-del"></i>
 									<i class="fa fa-trash fa-stack-1x" style="color:#fff"></i>

@@ -7,7 +7,7 @@
 		Departments List
 	</h1>
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="breadcrumb-item"><a href="{{ url('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
 		<li class="breadcrumb-item active">Department</li>
 	</ol>
 </section>
@@ -19,35 +19,42 @@
 <div class="box">
 	<div class="box-header">
 		<!-- <h3 class="box-title">Add Account</h3> -->
-		<a class="btn btn-add-new"  style="color: white" href="department/create">Add New</a>
+		<a class="btn btn-add-new"  style="color: white" href="department/create"> <i class="fa fa-plus"></i>Add New</a>
 	</div>
 	<!-- /.box-header -->
 	<div class="box-body">
 		<div class="table-responsive">
+
+			@if ($message = Session::get('success'))
+			<div class="alert alert-success">
+				<p>{{ $message }}</p>
+			</div>
+			@endif
+
 			<table id="example1" class="table  table-striped">
 				<thead>
 					<tr class="" style="">
 						<th>Name</th>
-						<th>Description</th>
+						<th style="width: 800px">Detail</th>
 						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					
 					@foreach($departments as $department)
-						<tr>
-							<td>{{$department->name}}</td>
-							<td>{{$department->description}}</td>
-							<td class="">
+					<tr>
+						<td>{{$department->name}}</td>
+						<td>{{$department->detail}}</td>
+						<td class="">
 							
-							<a href='{{ url("account/show/$department->id") }}'>
+							<a href='{{ url("systemsettings/department/$department->id") }}'>
 								<span class="fa-stack fa-1x">
 									<i class="fa fa-circle fa-stack-2x icon-background icon-view"></i>
 									<i class="fa fa-eye fa-stack-1x" style="color:#fff"></i>
 								</span>
 							</a>
 
-							<a href='{{ url("account/edit/$department->id") }}'>
+							<a href="{{ url('systemsettings/department/department->id') }}">
 								<span class="fa-stack fa-1x">
 									<i class="fa fa-circle fa-stack-2x icon-background icon-edit"></i>
 									<i class="fa fa-edit fa-stack-1x" style="color:#fff"></i>
@@ -62,9 +69,9 @@
 							</a>
 						</span>
 					</td>
-						</tr>
-					@endforeach
-		</tbody>
+				</tr>
+				@endforeach
+			</tbody>
 		</table>
 	</div>
 </div>

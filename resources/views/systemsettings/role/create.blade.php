@@ -19,19 +19,18 @@
 		<h4>Create Role</h4>
 	</div>
 
-	@if ($errors->any())
-	<div class="alert alert-danger">
-		<ul>
-			@foreach ($errors->all() as $error)
-			<li>{{ $error }}</li>
-			@endforeach
-		</ul>
-	</div>
-	@endif
-	
-	<div class="card-body" >
 
-		<form action="{{ url('/addRole') }}" method="post">
+	<div class="card-body" >
+		@if ($errors->any())
+		<div class="alert alert-danger">
+			<ul>
+				@foreach ($errors->all() as $error)
+				<li>{{ $error }}</li>
+				@endforeach
+			</ul>
+		</div>
+		@endif
+		<form action="{{ url('systemsettings/role') }}" method="post">
 			@csrf
 			<div class="row">
 				<div class="form-group col-md-12">
