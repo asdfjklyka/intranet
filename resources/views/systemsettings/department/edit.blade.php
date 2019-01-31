@@ -19,6 +19,15 @@
 	</div>
 	<div class="card-body" >
 
+		@if ($errors->any())
+		<div class="alert alert-danger">
+			<ul>
+				@foreach ($errors->all() as $error)
+				<li>{{ $error }}</li>
+				@endforeach
+			</ul>
+		</div>
+		@endif
 		<form action='{{ url("/systemsettings/department/$departments->id") }}' method="post">
 			@csrf
 			{{ method_field('PATCH') }}		
@@ -30,31 +39,31 @@
 
 				<div class="form-group col-md-12">
 					
-					</div>
-
-					<div class="form-group col-md-12">
-						<label for="name">Detail</label>
-						<input type="text" class="form-control" id="detail" value="{{ $departments->detail}}" name="detail" placeholder="Detail" aria-describedby="fnHelp">
-					</div>
-
-					<div class="form-group col-md-12"></div>
-
-					<div class="form-group col-md-12">
-						<a href="{{ url('/systemsettings/department') }}" class="btn btn-sm btn-success">Back</a>
-						<button type="submit" id="updatedept" class="btn btn-add-new float-right">Update</button>	
-					</div>
-
 				</div>
-			</form>
-		</div>
 
-		@endsection
+				<div class="form-group col-md-12">
+					<label for="name">Detail</label>
+					<input type="text" class="form-control" id="detail" value="{{ $departments->detail }}" name="detail" placeholder="Detail" aria-describedby="fnHelp">
+				</div>
+
+				<div class="form-group col-md-12"></div>
+
+				<div class="form-group col-md-12">
+					<a href="{{ url('/systemsettings/department') }}" class="btn btn-sm btn-success">Back</a>
+					<button type="submit" id="updatedept" class="btn btn-add-new float-right">Update</button>	
+				</div>
+
+			</div>
+		</form>
+	</div>
+
+	@endsection
 
 
-		<script type="text/javascript">
-			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+	<script type="text/javascript">
+		var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
-			$(document).ready(function(){
+		$(document).ready(function(){
 
 
 	// Add record

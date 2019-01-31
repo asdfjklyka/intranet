@@ -14,7 +14,7 @@
 
 @section('body')
 <div class="card" style="width: 100%;  box-shadow: 0 0 5px 1px #ccc; margin: auto;">
-	<div class="card-header">
+	<div class="card-header">	
 		<h4>Create New User</h4>
 	</div>
 	<div class="card-body" >

@@ -47,21 +47,21 @@
 							<td>{{$role->description}}</td>
 							<td class="">
 							
-							<a href='{{ url("account/show/$role->id") }}'>
+							<a href='{{ url("systemsettings/role/$role->id/show") }}'>
 								<span class="fa-stack fa-1x">
 									<i class="fa fa-circle fa-stack-2x icon-background icon-view"></i>
 									<i class="fa fa-eye fa-stack-1x" style="color:#fff"></i>
 								</span>
 							</a>
 
-							<a href='{{ url("account/edit/$role->id") }}'>
+							<a href='{{ url("systemsettings/role/$role->id/edit") }}'>
 								<span class="fa-stack fa-1x">
 									<i class="fa fa-circle fa-stack-2x icon-background icon-edit"></i>
 									<i class="fa fa-edit fa-stack-1x" style="color:#fff"></i>
 								</span>
 							</a>
 
-							<a href='{{ url("account/destroy/$role->id") }}'>
+							<a href='{{ url("systemsettings/role/$role->id/delete") }}'>
 								<span class="fa-stack fa-1x">
 									<i class="fa fa-circle fa-stack-2x icon-background icon-del"></i>
 									<i class="fa fa-trash fa-stack-1x" style="color:#fff"></i>

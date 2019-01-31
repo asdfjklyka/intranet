@@ -23,18 +23,13 @@ class UserController extends Controller
 
 		 //validate incoming request
     $validate = $request->validate([
-      'name' => 'required|Regex:/^[\D]+$/i|max:50|min:6',
+      'name' => 'required|Regex:/^[\D]+$/i|max:50|min:5',
       'email' => 'required|email|unique:users|max:50',
-      'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+      'password' => 'required|between:6,50',
       'role' => 'required',
     ]);
 
-    
 
-   /* if ($validate->fails()) {
-      return redirect()->back()->withInput();
-    }
-*/
     $data = $request->all();
 
     $data["password"] = Hash::make($data["password"]);
@@ -54,7 +49,7 @@ class UserController extends Controller
   public function update(Request $request, $id){
 
     $validate = $request->validate([
-      'name' => 'Regex:/^[\D]+$/i|max:50|min:6',
+      'name' => 'Regex:/^[\D]+$/i|max:50|min:5',
       'email' => 'email|max:50', 
     ]);
 
@@ -62,7 +57,7 @@ class UserController extends Controller
 
     if($request->password !== null ){
       $request->validate([
-        'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/'
+        'password' => 'between:6,50'
       ]);
 
       $request->merge([
@@ -73,11 +68,9 @@ class UserController extends Controller
     if( $user->update( array_filter($request->all()) ) ) {
 
       return redirect()->route('user.index')
-        ->with('success', 'User Successfully Updated!');
+      ->with('success', 'New User Successfully Updated!');
     }
-    
     return "Can't update user.";
-
   }
   
   public function edit(Request $request, $userId)
@@ -85,6 +78,13 @@ class UserController extends Controller
     $data["users"] = User::find($userId);
     $data["roles"] = Role::all();
     return view('systemsettings.user.edit', $data);
+  }
+
+  public function destroy(Request $request)
+  {
+    if(User::destroy($user->id)){
+      return view("manage.archive");
+    }
   }
 
 }

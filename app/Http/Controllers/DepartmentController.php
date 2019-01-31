@@ -17,7 +17,7 @@ class DepartmentController extends Controller
 	public function store(Request $request) {
 
 		$validate = $request->validate([
-			'name' => 'required|string|max:50|unique:departments'
+			'name' => 'required|string|between:6,50|unique:departments'
 		]);
 
 		$data = $request->all();
@@ -33,10 +33,10 @@ class DepartmentController extends Controller
 	}
 
 	public function update(Request $request, $id){
-/*
+
     $validate = $request->validate([
-      'name' => 'string|max:50|min:6',
-    ]);*/
+      'name' => 'required|string|between:6,50',
+    ]);
 
     $department = Department::find($id);
 

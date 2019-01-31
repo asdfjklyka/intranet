@@ -87,7 +87,7 @@
 			</div>
 
 			<a href="{{ url('/systemsettings/user') }}" class="btn btn-sm btn-primary">Back</a>
-			<button type="submit" id="update" class="btn btn-add-new float-right">Create</button>
+			<button type="submit" id="update" class="btn btn-add-new float-right">Update</button>
 		</form>
 
 	</div>

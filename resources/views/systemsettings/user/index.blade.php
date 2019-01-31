@@ -66,7 +66,7 @@
 								</span>
 							</a>
 
-							<a href='{{ url("systemsettings/user/$user->id") }}'>
+							<a href='{{ route("user.destroy, $user->id") }}'>
 								<span class="fa-stack fa-1x">
 									<i class="fa fa-circle fa-stack-2x icon-background icon-del"></i>
 									<i class="fa fa-trash fa-stack-1x" style="color:#fff"></i>

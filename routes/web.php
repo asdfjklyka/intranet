@@ -16,13 +16,15 @@ Route::get('/', function () {
 });
 
 //Auth::routes();
+Route::get('login', 'LoginController@login');
+
 
 Route::get('/home', function () {
     return view('admin.home');
 });
 
 Route::get('home/dashboard', 'HomeController@dashboard');
-
+Route::get('userarchive', 'ManageController@archive');
 
 //UserController
 Route::resource('systemsettings/user', 'UserController');
@@ -36,3 +38,11 @@ Route::post('/addDepartment', 'DepartmentController@store');
 //RoleController
 Route::resource('systemsettings/role', 'RoleController');
 Route::post('/addRole', 'RoleController@store');
+
+//EmployeeController
+Route::resource('employee/information', 'EmployeeController');
+//Route::post('/add', 'RoleController@store');
+
+
+//PersonalInfoController
+Route::resource('employee/personalinformation', 'PersonalInfoController');

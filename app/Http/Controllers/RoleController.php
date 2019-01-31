@@ -17,7 +17,7 @@ class RoleController extends Controller
  public function store(Request $request) 
  {
       $validate = $request->validate([
-            'name' => 'required|string|max:50|unique:roles'
+            'name' => 'required|string|between:6,50|unique:roles'
         ]);
 
       $data = $request->all();
@@ -32,11 +32,28 @@ class RoleController extends Controller
  }
 
 	// Update record
- public function update(Request $request){
-  $role = Role::find($request->id);
-  if($role->update(array_filter($request->except('_token')))){
-    return "User Record Updated successfully";
+ public function update(Request $request, $id){
+
+    $validate = $request->validate([
+      'name' => 'required|string|between:6,50',
+      
+    ]);
+
+    $role = Role::find($id);
+
+    if( $role->update( array_filter($request->all()) ) ) {
+
+      return redirect()->route('department.index')
+        ->with('success', 'Role Successfully Updated!');
+    }
+    
+    return "Can't update department.";
+
   }
-  return "Can't update user.";
-}
+  
+  public function edit(Request $request, $roleId)
+  {
+    $data["roles"] = Role::find($roleId);
+    return view('systemsettings.role.edit', $data);
+  }
 }
